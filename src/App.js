@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import ReactDOM from 'react-dom';
-import MoviePage from './MoviePage';
 import MovieList from './MovieList';
+import MovieDetails from './MovieDetails';
 
 export default class App extends PureComponent {
 
@@ -19,7 +19,7 @@ export default class App extends PureComponent {
   };
 
   componentDidUpdate(nextProps, prevState) {
-    if(prevState.showDetail !== this.state.showDetail) {
+    if (prevState.showDetail !== this.state.showDetail) {
       window.scrollTo(0, 0);
     }
   }
@@ -43,10 +43,14 @@ export default class App extends PureComponent {
 
   render() {
     const {showDetail, currentId} = this.state;
-    if(showDetail) {
-      return <MoviePage id={currentId} handleBackClick={this._handleBackClick}/>
-    } else {
-      return <MovieList onClick={this._onMovieDetailsClick}/>
-    }
+    return (
+      <div>
+        {
+          currentId ?
+            <MovieDetails id={currentId} showDetail={showDetail} handleBackClick={this._handleBackClick}/> :
+            <MovieList onClick={this._onMovieDetailsClick}/>
+        }
+      </div>
+    );
   }
 }

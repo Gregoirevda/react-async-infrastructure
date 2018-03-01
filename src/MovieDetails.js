@@ -10,8 +10,9 @@ export default class MovieDetails extends PureComponent {
   };
 
   render(){
-    const {id, handleBackClick} = this.props;
+    const {id, handleBackClick, showDetail} = this.props;
     const {movieDetails} = this.state;
+    console.log('showDetail', showDetail);
 
     /* Looks BAD */
     const prom = runPureTask(() => fetchMovieDetails(id))
@@ -23,7 +24,7 @@ export default class MovieDetails extends PureComponent {
 
     console.log('prom', prom);
     console.log('movieDetails', movieDetails);
-    return <div>
+    return showDetail && <div>
       <h4> MovieDetails {id}</h4>
       <p>
         title: {movieDetails.title}
