@@ -13,7 +13,8 @@ export default class MovieDetails extends PureComponent {
     const {id, handleBackClick} = this.props;
     const {movieDetails} = this.state;
 
-    const prom = runPureTask(fetchMovieDetails)
+    /* Looks BAD */
+    const prom = runPureTask(() => fetchMovieDetails(id))
       .then((res) => {
         this.setState({
           movieDetails: res
